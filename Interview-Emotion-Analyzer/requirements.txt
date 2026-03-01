@@ -3,3 +3,6 @@ uvicorn[standard]
 pyjwt
 python-multipart
 speechrecognition
+deepface
+pyaudio
+opencv-python
