@@ -2,7 +2,7 @@ fastapi
 uvicorn[standard]
 pyjwt
 python-multipart
-deepface
 speechrecognition
+deepface
 pyaudio
 opencv-python
