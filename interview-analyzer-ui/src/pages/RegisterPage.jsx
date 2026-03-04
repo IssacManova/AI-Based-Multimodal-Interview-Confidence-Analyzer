@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, User, Lock, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react'
+import { User, Lock, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react'
+import MicLogoSVG from '../components/MicLogoSVG'
 import { authAPI } from '../services/api'
 
 export default function RegisterPage() {
@@ -93,13 +94,12 @@ export default function RegisterPage() {
             >
                 <div className="auth-logo">
                     <motion.div
-                        className="auth-logo-icon"
-                        whileHover={{ rotate: -10, scale: 1.05 }}
+                        whileHover={{ rotate: -10, scale: 1.08 }}
                         transition={{ type: 'spring', stiffness: 300 }}
                     >
-                        <Brain size={28} color="white" />
+                        <MicLogoSVG size={46} />
                     </motion.div>
-                    <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.3rem' }}>
+                    <span className="nav-logo-text" style={{ fontSize: '1.3rem' }}>
                         InterviewAI
                     </span>
                 </div>

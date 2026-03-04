@@ -637,14 +637,31 @@ h6 {
   text-decoration: none;
 }
 
-.nav-logo-icon {
-  width: 36px;
-  height: 36px;
+/* Custom SVG logo mark */
+.nav-logo-svg {
+  flex-shrink: 0;
+  border-radius: 10px;
+  transition: transform var(--transition-base), filter var(--transition-base);
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.35));
+}
+
+.nav-logo:hover .nav-logo-svg {
+  transform: scale(1.08) rotate(-3deg);
+  filter: drop-shadow(0 4px 16px rgba(139, 92, 246, 0.65));
+}
+
+.nav-logo-text {
   background: var(--grad-primary);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  transition: filter var(--transition-base);
+}
+
+.nav-logo:hover .nav-logo-text {
+  filter: brightness(1.25);
 }
 
 .nav-links {
@@ -693,64 +710,20 @@ h6 {
   flex-shrink: 0;
 }
 
-/* ================== SIDEBAR ================== */
-.layout-wrapper {
-  display: flex;
-  min-height: 100vh;
+/* ================== MAIN CONTENT (no sidebar) ================== */
+.main-content-full {
   padding-top: 64px;
+  /* height of the fixed navbar */
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 5rem;
+  /* space above mobile bottom nav */
 }
 
-.sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  height: calc(100vh - 64px);
-  position: sticky;
-  top: 64px;
-  padding: 1.5rem 0;
-  border-right: 1px solid var(--border-subtle);
-  overflow-y: auto;
-}
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0 0.75rem;
-}
-
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.7rem 1rem;
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.sidebar-link:hover {
-  background: var(--bg-card);
-  color: var(--text-primary);
-}
-
-.sidebar-link.active {
-  background: rgba(139, 92, 246, 0.15);
-  color: var(--purple-400);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-}
-
-.sidebar-link svg {
-  flex-shrink: 0;
-}
-
-.main-content {
-  flex: 1;
-  overflow: auto;
-  padding: 2rem 2.5rem;
-}
 
 /* ================== STAT CARDS ================== */
 .stat-card {
@@ -1252,6 +1225,11 @@ h6 {
 @media (max-width: 768px) {
   .mobile-nav {
     display: block;
+  }
+
+  .main-content-full {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .auth-card {

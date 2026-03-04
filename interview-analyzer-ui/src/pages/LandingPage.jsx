@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, Zap, BarChart3, Mic, Camera, Shield, ArrowRight, CheckCircle } from 'lucide-react'
+import MicLogoSVG from '../components/MicLogoSVG'
+import { Zap, BarChart3, Mic, Camera, Shield, ArrowRight, CheckCircle } from 'lucide-react'
 
 const features = [
     { icon: Camera, title: 'Facial Emotion AI', desc: 'Real-time FER detection tracks 7 emotions across 30+ second sessions', color: 'var(--purple-400)' },
@@ -33,8 +34,8 @@ export default function LandingPage() {
             <nav className="navbar">
                 <div className="nav-inner">
                     <Link to="/" className="nav-logo">
-                        <div className="nav-logo-icon"><Brain size={20} color="white" /></div>
-                        InterviewAI
+                        <MicLogoSVG />
+                        <span className="nav-logo-text">InterviewAI</span>
                     </Link>
                     <div className="nav-links">
                         <a href="#features" className="nav-link">Features</a>
@@ -232,10 +233,10 @@ export default function LandingPage() {
             <footer style={{ borderTop: '1px solid var(--border-subtle)', padding: '2rem 0', position: 'relative', zIndex: 1, textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
                 <div className="container">
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                        <Brain size={16} style={{ color: 'var(--purple-400)' }} />
+                        <MicLogoSVG size={22} />
                         <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--text-secondary)' }}>InterviewAI</span>
                     </div>
-                    © 2024 InterviewAI – All rights reserved.
+                    © 2025 InterviewAI – All rights reserved.
                 </div>
             </footer>
         </div>
