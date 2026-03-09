@@ -5,7 +5,7 @@ detector = FER(mtcnn=True)
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 emotion_history = []
 start_time = time.time()
-duration = 60
+duration = 30
 while True:
     ret, frame = cap.read()
     if not ret or frame is None:

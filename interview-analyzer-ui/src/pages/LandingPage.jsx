@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import MicLogoSVG from '../components/MicLogoSVG'
+import PublicNavbar from '../components/PublicNavbar'
 import { Zap, BarChart3, Mic, Camera, Shield, ArrowRight, CheckCircle } from 'lucide-react'
 
 const features = [
@@ -21,7 +21,6 @@ const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 }
-
 const itemVariants = {
     hidden: { opacity: 0, y: 24 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
@@ -30,25 +29,10 @@ const itemVariants = {
 export default function LandingPage() {
     return (
         <div className="page-container">
-            {/* Navbar */}
-            <nav className="navbar">
-                <div className="nav-inner">
-                    <Link to="/" className="nav-logo">
-                        <MicLogoSVG />
-                        <span className="nav-logo-text">InterviewAI</span>
-                    </Link>
-                    <div className="nav-links">
-                        <a href="#features" className="nav-link">Features</a>
-                        <a href="#stats" className="nav-link">Stats</a>
-                    </div>
-                    <div style={{ display: 'flex', gap: '0.75rem' }}>
-                        <Link to="/login" className="btn btn-ghost">Sign In</Link>
-                        <Link to="/register" className="btn btn-primary">Get Started</Link>
-                    </div>
-                </div>
-            </nav>
+            {/* ── Shared nav with theme toggle ── */}
+            <PublicNavbar showAuthLinks={true} />
 
-            {/* Hero */}
+            {/* ── Hero ── */}
             <section className="hero-section" style={{ paddingTop: '8rem' }}>
                 <motion.div initial="hidden" animate="visible" variants={containerVariants}>
                     <motion.div variants={itemVariants}>
@@ -103,7 +87,7 @@ export default function LandingPage() {
                                 </div>
                             </div>
 
-                            {/* Fake progress indicators */}
+                            {/* Score indicators */}
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
                                 {[
                                     { label: 'Emotion Score', value: 82, color: 'var(--grad-primary)' },
@@ -137,18 +121,14 @@ export default function LandingPage() {
                                 </div>
                             </div>
 
-                            {/* Glow overlay */}
-                            <div style={{
-                                position: 'absolute', bottom: 0, left: 0, right: 0, height: '60px',
-                                background: 'linear-gradient(to top, rgba(5,8,16,0.8), transparent)',
-                                pointerEvents: 'none',
-                            }} />
+                            {/* Fade-out overlay — uses CSS variable so it adapts to both themes */}
+                            <div className="hero-card-fade" />
                         </div>
                     </motion.div>
                 </motion.div>
             </section>
 
-            {/* Stats */}
+            {/* ── Stats ── */}
             <section id="stats" style={{ padding: '4rem 0', position: 'relative', zIndex: 1 }}>
                 <div className="container">
                     <div className="grid-4">
@@ -172,7 +152,7 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Features */}
+            {/* ── Features ── */}
             <section id="features" style={{ padding: '4rem 0 6rem', position: 'relative', zIndex: 1 }}>
                 <div className="container">
                     <motion.div
@@ -229,11 +209,10 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Footer */}
+            {/* ── Footer ── */}
             <footer style={{ borderTop: '1px solid var(--border-subtle)', padding: '2rem 0', position: 'relative', zIndex: 1, textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
                 <div className="container">
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                        <MicLogoSVG size={22} />
                         <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--text-secondary)' }}>InterviewAI</span>
                     </div>
                     © 2025 InterviewAI – All rights reserved.

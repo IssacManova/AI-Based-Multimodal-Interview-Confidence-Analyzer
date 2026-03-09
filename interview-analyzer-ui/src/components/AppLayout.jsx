@@ -1,9 +1,10 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
-    LayoutDashboard, Video, History, LogOut, UserCircle
+    LayoutDashboard, Video, History, LogOut, UserCircle, Sun, Moon
 } from 'lucide-react'
 import useAuthStore from '../store/authStore'
+import useThemeStore from '../store/themeStore'
 import MicLogoSVG from './MicLogoSVG'
 
 const navItems = [
@@ -15,6 +16,7 @@ const navItems = [
 
 export default function AppLayout() {
     const { user, logout } = useAuthStore()
+    const { theme, toggleTheme } = useThemeStore()
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -26,6 +28,8 @@ export default function AppLayout() {
         ? user.full_name.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2)
         : user?.username?.[0]?.toUpperCase() || 'U'
 
+    const isDark = theme === 'dark'
+
     return (
         <div className="page-container">
             {/* Top Navbar */}
@@ -35,7 +39,6 @@ export default function AppLayout() {
                         <MicLogoSVG />
                         <span className="nav-logo-text">InterviewAI</span>
                     </NavLink>
-
 
                     {/* Desktop nav links */}
                     <div className="nav-links">
@@ -51,6 +54,26 @@ export default function AppLayout() {
                     </div>
 
                     <div className="nav-user">
+                        {/* ── Theme toggle ── */}
+                        <motion.button
+                            className="theme-toggle"
+                            onClick={toggleTheme}
+                            whileTap={{ scale: 0.88, rotate: 15 }}
+                            whileHover={{ scale: 1.08 }}
+                            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                            aria-label="Toggle theme"
+                        >
+                            <motion.div
+                                key={theme}
+                                initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
+                                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                exit={{ opacity: 0, rotate: 30, scale: 0.7 }}
+                                transition={{ duration: 0.25 }}
+                            >
+                                {isDark ? <Sun size={17} /> : <Moon size={17} />}
+                            </motion.div>
+                        </motion.button>
+
                         <NavLink
                             to="/profile"
                             style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
@@ -99,6 +122,15 @@ export default function AppLayout() {
                             {label}
                         </NavLink>
                     ))}
+                    {/* Mobile theme toggle */}
+                    <button
+                        className="mobile-nav-item"
+                        onClick={toggleTheme}
+                        style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'var(--purple-400)' }}
+                    >
+                        {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                        {isDark ? 'Light' : 'Dark'}
+                    </button>
                     <button
                         className="mobile-nav-item"
                         onClick={handleLogout}

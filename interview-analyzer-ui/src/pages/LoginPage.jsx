@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, AlertCircle, Sun, Moon } from 'lucide-react'
 import MicLogoSVG from '../components/MicLogoSVG'
 import useAuthStore from '../store/authStore'
+import useThemeStore from '../store/themeStore'
 import { authAPI } from '../services/api'
 
 export default function LoginPage() {
@@ -12,6 +13,8 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const { login } = useAuthStore()
+    const { theme, toggleTheme } = useThemeStore()
+    const isDark = theme === 'dark'
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -39,6 +42,25 @@ export default function LoginPage() {
 
     return (
         <div className="auth-page">
+            {/* Floating theme toggle */}
+            <motion.button
+                className="theme-toggle"
+                onClick={toggleTheme}
+                whileTap={{ scale: 0.88, rotate: 15 }}
+                whileHover={{ scale: 1.08 }}
+                title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                style={{ position: 'fixed', top: '1.25rem', right: '1.5rem', zIndex: 200 }}
+            >
+                <motion.div
+                    key={theme}
+                    initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    transition={{ duration: 0.25 }}
+                >
+                    {isDark ? <Sun size={17} /> : <Moon size={17} />}
+                </motion.div>
+            </motion.button>
+
             {/* Animated background particles */}
             <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
                 {[...Array(6)].map((_, i) => (

@@ -6,3 +6,6 @@ speechrecognition
 deepface
 pyaudio
 opencv-python
+openai-whisper
+numpy
+textblob
